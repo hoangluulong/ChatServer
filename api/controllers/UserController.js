@@ -52,7 +52,6 @@ module.exports = {
     delete: (req, res) => {
         let userID = req.params.id;
         let sql = 'DELETE FROM users WHERE id = ?'
-        console.log(userID);
         db.query(sql, [userID], (err, response) => {
             if (err) throw err
             res.json({message: 'Delete success! '})
