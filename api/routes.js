@@ -5,7 +5,7 @@ module.exports = function(app) {
   // todoList Routes
   app.route('/users')
     .get(usersCtrl.get)
-    .post(usersCtrl.store);
+    .post(usersCtrl.insert);
 
   app.route('/users/:userID')
     .get(usersCtrl.detail)

@@ -29,28 +29,33 @@ module.exports = {
     update: (req, res) => {
         let data = req.body;
         let userID = req.params.id;
-        let username = req.params.user_name;
-        let sql = 'UPDATE users SET user_name = ? WHERE id = ?';
-        //UPDATE `users` SET `user_name` = 'user11' WHERE `users`.`id` = 1
-        db.query(sql, [data,username, userID], (err, response) => {
+        let username = req.params.username;
+        let email = req.params.email;
+        let password = req.params.password;
+        let sql = 'UPDATE users SET username = ?, email=?, password=? WHERE id = ?';
+        //UPDATE `users` SET `user_name` = 'user22', `email` = 'user22@gmail.com', `password` = '1234567' WHERE `users`.`id` = 2;
+        db.query(sql, [data,username, email, password, userID], (err, response) => {
             if (err) throw err
-            res.json({message: 'Update success!'})
+            res.json({message: 'Update success! ' + username + " " + email + " " + password})
         })
     },
-    
-    store: (req, res) => {
+
+    insert: (req, res) => {
         let data = req.body;
-        let sql = 'INSERT INTO users SET ?'
+        let sql = 'INSERT INTO users (id, username, email, password) VALUES (NULL, ?, ?, ?)'
+        //INSERT INTO `users` (`id`, `user_name`, `email`, `password`) VALUES (NULL, 'user2', 'user2@gmail.com', '123456');
         db.query(sql, [data], (err, response) => {
             if (err) throw err
             res.json({message: 'Insert success!'})
         })
     },
     delete: (req, res) => {
+        let userID = req.params.id;
         let sql = 'DELETE FROM users WHERE id = ?'
-        db.query(sql, [req.params.id], (err, response) => {
+        console.log(userID);
+        db.query(sql, [userID], (err, response) => {
             if (err) throw err
-            res.json({message: 'Delete success!'})
+            res.json({message: 'Delete success! '})
         })
     }
 }
