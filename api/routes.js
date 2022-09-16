@@ -1,14 +1,14 @@
 'use strict';
 module.exports = function(app) {
-  let productsCtrl = require('./controllers/UserController');
+  let usersCtrl = require('./controllers/UserController');
 
   // todoList Routes
   app.route('/users')
-    .get(productsCtrl.get)
-    .post(productsCtrl.store);
+    .get(usersCtrl.get)
+    .post(usersCtrl.store);
 
   app.route('/users/:userID')
-    .get(productsCtrl.detail)
-    .put(productsCtrl.update)
-    .delete(productsCtrl.delete);
+    .get(usersCtrl.detail)
+    .put(usersCtrl.update)
+    .delete(usersCtrl.delete);
 };

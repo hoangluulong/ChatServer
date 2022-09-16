@@ -12,6 +12,13 @@ module.exports = {
             res.json(response)
         })
     },
+    post: (req, res) => {
+        let sql = 'SELECT * FROM users'
+        db.query(sql, (err, response) => {
+            if (err) throw err
+            res.json(response)
+        })
+    }, 
     detail: (req, res) => {
         let sql = 'SELECT * FROM users WHERE id = ?'
         db.query(sql, [req.params.id], (err, response) => {
@@ -22,12 +29,15 @@ module.exports = {
     update: (req, res) => {
         let data = req.body;
         let userID = req.params.id;
-        let sql = 'UPDATE products SET ? WHERE id = ?'
-        db.query(sql, [data, userID], (err, response) => {
+        let username = req.params.user_name;
+        let sql = 'UPDATE users SET user_name = ? WHERE id = ?';
+        //UPDATE `users` SET `user_name` = 'user11' WHERE `users`.`id` = 1
+        db.query(sql, [data,username, userID], (err, response) => {
             if (err) throw err
             res.json({message: 'Update success!'})
         })
     },
+    
     store: (req, res) => {
         let data = req.body;
         let sql = 'INSERT INTO users SET ?'
